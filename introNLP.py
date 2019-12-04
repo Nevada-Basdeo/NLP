@@ -253,6 +253,36 @@ my_documents = ['The movie was about a spaceship and aliens.',
                 'The movie was awful! I hate alien films.',
                 'Space is cool! I liked the movie.', 
                 'More space films, please!']
+tokenized_docs = [word_tokenize(doc.lower()) for doc in my_documents]
+dictionary = Dictionary(tokenized_docs)
+
+dictionary.token2id # lets us see the tokens and their respective id's 
+
+corpus = [dictionary.doc2bow(doc) for doc in tokenized_docs] # will give a list of list, wich each iteam a tuple.  the first number
+# is the id and the second is the frequency of that term
+
+## Creating and querying a corpus with gensim ##
+# Import Dictionary
+from gensim.corpora.dictionary import Dictionary
+
+# Create a Dictionary from the articles: dictionary
+dictionary = Dictionary(articles)
+
+# Select the id for "computer": computer_id
+computer_id = dictionary.token2id.get("computer")
+
+# Use computer_id with the dictionary to print the word
+print(dictionary.get(computer_id))
+
+# Create a MmCorpus: corpus
+corpus = [dictionary.doc2bow(article) for article in articles]
+
+# Print the first 10 word ids with their frequency counts from the fifth document
+print(corpus[4][:10])
+
+## Gensim bag-of-words ##
+
+
 
 
 
