@@ -304,8 +304,29 @@ sorted_word_count = sorted(total_word_count.items(), key=lambda w: w[1], reverse
 for word_id, word_count in sorted_word_count[:5]:
     print(dictionary.get(word_id), word_count)
 
+  
+  
+## Tf-idf with gensim ##
+from gensim.models.tfidfmodel import TfidfModel
+tfidf = TfidfModel(corpus)
+tfidf[corpus[1]] # can reference each document by using it like a dictionary key-- giving is the token id's and token weights for the second document here
 
+# Tf-idf with Wikipedia
+# Create a new TfidfModel using the corpus: tfidf
+tfidf = TfidfModel(corpus)
 
+# Calculate the tfidf weights of doc: tfidf_weights doc is corpus[4]
+tfidf_weights = tfidf[doc]
+
+# Print the first five weights
+print(tfidf_weights[0:5])
+
+# Sort the weights from highest to lowest: sorted_tfidf_weights
+sorted_tfidf_weights = sorted(tfidf_weights, key=lambda w: w[1], reverse=True)
+
+# Print the top 5 weighted words
+for term_id, weight in sorted_tfidf_weights[:5]:
+    print(dictionary.get(term_id), weight)
 
 
 
